@@ -130,19 +130,7 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     public void initMatchList(){
         System.out.println("Init Match List is Starting");
 
-        for(int i=0; i < riotController.match.getRecentGamesCollected().size(); i++)
-        {
-            matchListItems.add(
-                    new MatchListItem(riotController.match.getRecentGamesCollected().get(i).getChampion().getName(),
-                        riotController.match.getRecentGamesCollected().get(i).getType().toString(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getKills(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getDeaths(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getAssists(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getMinionsKilled(),
-                        ((int) riotController.match.getRecentGamesCollected().get(i).getStats().getTimePlayed())));
-        }
-
-        matchListAdapter = new MatchListAdapter(getApplicationContext(), R.layout.game_view, matchListItems);
+        matchListAdapter = new MatchListAdapter(getApplicationContext(), R.layout.game_view, riotController.getMatchListItems());
         matchListView.setAdapter(matchListAdapter);
     }
 }

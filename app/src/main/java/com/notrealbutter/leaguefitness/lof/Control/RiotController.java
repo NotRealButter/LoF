@@ -1,6 +1,7 @@
 package com.notrealbutter.leaguefitness.lof.Control;
 
 import com.notrealbutter.leaguefitness.lof.Model.Match;
+import com.notrealbutter.leaguefitness.lof.Model.MatchListItem;
 import com.notrealbutter.leaguefitness.lof.Model.SummonerAccount;
 import com.robrua.orianna.api.core.AsyncRiotAPI;
 import com.robrua.orianna.api.dto.BaseRiotAPI;
@@ -10,14 +11,16 @@ import com.robrua.orianna.type.core.game.Game;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import com.robrua.orianna.type.exception.APIException;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class RiotController
 {
     public SummonerAccount summonerAccount;
     public Match match;
-    public ListIterator matchIterator;
+    private ArrayList<MatchListItem> matchListItems = new ArrayList<>();
+    ;
+
 
     public RiotController(){
         summonerAccount = new SummonerAccount();
@@ -55,18 +58,34 @@ public class RiotController
             @Override
             public void perform(List<Game> responseData) {
                 match.setRecentGamesCollected(responseData);
-                matchIterator = match.getRecentGamesCollected().listIterator();
-
-                while(matchIterator.hasNext()) {
-                   System.out.println(matchIterator.next());
-//                    System.out.println(match.getRecentGamesCollected().get(matchIterator.previousIndex()).getID());
-                }
             }
-        },summonerAccount.getSummonerName());
+        }, summonerAccount.getSummonerName());
 
+    }
+    public void initMatchList() {
+        for (int i = 0; i < match.getRecentGamesCollected().size(); i++) {
+
+            getMatchListItems().add(
+                    new MatchListItem(match.getRecentGamesCollected().get(i).getChampion().getName(),
+                            match.getRecentGamesCollected().get(i).getType().toString(),
+                            match.getRecentGamesCollected().get(i).getStats().getKills(),
+                            match.getRecentGamesCollected().get(i).getStats().getDeaths(),
+                            match.getRecentGamesCollected().get(i).getStats().getAssists(),
+                            match.getRecentGamesCollected().get(i).getStats().getMinionsKilled(),
+                            ((int) match.getRecentGamesCollected().get(i).getStats().getTimePlayed())));
+        }
     }
 
     public void setSummonerAccount(SummonerAccount acct){
         summonerAccount = acct;
     }
+
+    public ArrayList<MatchListItem> getMatchListItems() {
+        return matchListItems;
+    }
+
+    public void setMatchListItems(ArrayList<MatchListItem> matchListItems) {
+        this.matchListItems = matchListItems;
+    }
+
 }

@@ -1,26 +1,17 @@
 package com.notrealbutter.leaguefitness.lof.View;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -155,8 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 // get user input and set it to result
                                 // edit text
                                 riotControl.summonerAccount.setNameCollected(userInput.getText().toString());
-//                                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
-                                new FetchGameInfo().execute();
+                                riotControl.initMatchList();
 
                             }
                         })
@@ -185,43 +175,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public class FetchGameInfo extends AsyncTask<String, Void, Boolean> {
-        RiotController riotControl = MainActivity.riotControl;
-
-        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            this.dialog.setMessage("Please wait");
-            this.dialog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            try {
-                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
-                return true;
-            } catch (Exception e) {
-                Log.e("tag", "error", e);
-                return false;
-            }
-        }
-        @Override
-        protected void onPostExecute(final Boolean success) {
-
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-
-                SpannableStringBuilder snackbarText = new SpannableStringBuilder();
-                snackbarText.append("Account ");
-                snackbarText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, snackbarText.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                int boldStart = snackbarText.length();
-                snackbarText.append(riotControl.summonerAccount.getSummonerName());
-                snackbarText.setSpan(new ForegroundColorSpan(Color.YELLOW), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                snackbarText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                snackbarText.append(" has been Summoned");
-                Snackbar.make(mDrawerLayout, snackbarText, Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE).show();
-            }
-        }
-    }
+//    public class FetchGameInfo extends AsyncTask<String, Void, Boolean> {
+//        String message; // for dialog message
+//        ProgressDialog progress;
+//        Intent myIntent;
+//        Context ctx;
+//
+//        public FetchGameInfo(String message, Context ctx)
+//        {
+//            this.message = message;
+//            this.ctx = ctx;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            // Runs on the UI thread
+//            super.onPreExecute();
+//            progress = new ProgressDialog(ctx);
+//            progress.setMessage(message);
+//            progress.setIndeterminate(true);
+//            progress.setCancelable(false);
+//            progress.show();
+//            System.out.println("fuck");
+//        }
+//
+//        @Override
+//        protected Boolean doInBackground(String... params) {
+//            try {
+//
+//
+//                    System.out.println("this");
+//
+//                                    return true;
+//
+//            } catch (Exception e) {
+//                Log.e("tag", "error", e);
+//                return false;
+//            }
+//        }
+//        @Override
+//        protected void onPostExecute(final Boolean success) {
+//            super.onPostExecute(success);
+//            if (progress.isShowing()) {
+//                progress.dismiss();
+//                System.out.println("shit");
+//
+//                SpannableStringBuilder snackbarText = new SpannableStringBuilder();
+//                snackbarText.append("Account ");
+//                snackbarText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, snackbarText.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                int boldStart = snackbarText.length();
+//                snackbarText.append(riotControl.summonerAccount.getSummonerName());
+//                snackbarText.setSpan(new ForegroundColorSpan(Color.YELLOW), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                snackbarText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                snackbarText.append(" has been Summoned");
+//                Snackbar.make(mDrawerLayout, snackbarText, Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE).show();
+//            }
+//        }
+//    }
 }
