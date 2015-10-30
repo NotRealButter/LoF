@@ -63,6 +63,7 @@ public class RiotController
                 }
             }
         },summonerAccount.getSummonerName());
+
     }
 
     public void setSummonerAccount(SummonerAccount acct){

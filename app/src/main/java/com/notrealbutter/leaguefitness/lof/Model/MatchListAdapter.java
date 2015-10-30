@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.notrealbutter.leaguefitness.lof.R;
@@ -16,10 +15,12 @@ public class MatchListAdapter extends BaseAdapter {
 
     Context mContext;
     ArrayList<MatchListItem> gameList;
+    int layoutResID;
 
-    public MatchListAdapter(Context context, ArrayList<MatchListItem> gameList) {
+    public MatchListAdapter(Context context, int layoutResourceID, ArrayList<MatchListItem> gameList) {
         this.mContext = context;
         this.gameList = gameList;
+        this.layoutResID = layoutResourceID;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MatchListAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.game_view, null);
+            view = inflater.inflate(layoutResID,parent,false);
         } else {
             view = convertView;
         }
@@ -58,11 +59,13 @@ public class MatchListAdapter extends BaseAdapter {
         TextView gameDurationBox = (TextView)view.findViewById(R.id.game_duration_box);
 
         championNameBox.setText(gameList.get(position).champName);
+        System.out.println(championNameBox.getText());
         gameType.setText(gameList.get(position).gameType);
-        kcBox.setText(gameList.get(position).kc);
-        dcBox.setText(gameList.get(position).dc);
-        acBox.setText(gameList.get(position).ac);
-        csBox.setText(gameList.get(position).cs);
-        gameDurationBox.setText(gameList.get(position).gameDuration);
+        System.out.println(gameType.getText());
+        kcBox.setText("" + gameList.get(position).kc);
+        dcBox.setText(""+gameList.get(position).dc);
+        acBox.setText(""+gameList.get(position).ac);
+        csBox.setText(""+gameList.get(position).cs);
+        gameDurationBox.setText(""+gameList.get(position).gameDuration);
         return view;    }
 }

@@ -1,7 +1,10 @@
 package com.notrealbutter.leaguefitness.lof.View;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,19 +16,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
 import com.notrealbutter.leaguefitness.lof.R;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-     DrawerLayout mDrawerLayout;
+    DrawerLayout mDrawerLayout;
     CoordinatorLayout coordinatorLayout;
 
     Intent gameStatIntent;
@@ -75,20 +83,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toast1.show();
         } else if (id == R.id.nav_game_stat) {
             startActivity(gameStatIntent);
-            Toast toast2 = Toast.makeText(getApplicationContext(),"this works2",Toast.LENGTH_LONG);
+            Toast toast2 = Toast.makeText(getApplicationContext(), "this works2", Toast.LENGTH_LONG);
             toast2.show();
         } else if (id == R.id.nav_exercise) {
             startActivity(exerciseIntent);
-            Toast toast3 = Toast.makeText(getApplicationContext(),"this works3",Toast.LENGTH_LONG);
+            Toast toast3 = Toast.makeText(getApplicationContext(), "this works3", Toast.LENGTH_LONG);
             toast3.show();
         } else if (id == R.id.nav_about) {
-            Toast toast4 = Toast.makeText(getApplicationContext(),"this works4",Toast.LENGTH_LONG);
+            Toast toast4 = Toast.makeText(getApplicationContext(), "this works4", Toast.LENGTH_LONG);
             toast4.show();
         } else if (id == R.id.nav_share) {
-            Toast toast5= Toast.makeText(getApplicationContext(),"this works5",Toast.LENGTH_LONG);
+            Toast toast5 = Toast.makeText(getApplicationContext(), "this works5", Toast.LENGTH_LONG);
             toast5.show();
         } else if (id == R.id.nav_send) {
-            Toast toast6 = Toast.makeText(getApplicationContext(),"this works6",Toast.LENGTH_LONG);
+            Toast toast6 = Toast.makeText(getApplicationContext(), "this works6", Toast.LENGTH_LONG);
             toast6.show();
         }
 
@@ -97,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void initMenus(){
+
+    public void initMenus() {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initFAB();
     }
 
-    public void initPrompt()
-    {
+    public void initPrompt() {
         // get prompts.xml view
         LayoutInflater li = LayoutInflater.from(MainActivity.this);
         View promptsView = li.inflate(R.layout.prompts, null);
@@ -143,18 +151,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(DialogInterface dialog, int id) {
                                 // get user input and set it to result
                                 // edit text
                                 riotControl.summonerAccount.setNameCollected(userInput.getText().toString());
-                                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
-                                Snackbar snackbar = Snackbar.make(mDrawerLayout,"Summoner " + riotControl.summonerAccount.getSummonerName() + " has been added to the Game Stat area", Snackbar.LENGTH_LONG );
-                                snackbar.show();
+//                                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
+                                new FetchGameInfo().execute();
+
                             }
                         })
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
                         });
@@ -165,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void initFAB(){
+    public void initFAB() {
         button = (FloatingActionButton) findViewById(R.id.fab);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -177,4 +185,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public class FetchGameInfo extends AsyncTask<String, Void, Boolean> {
+        RiotController riotControl = MainActivity.riotControl;
+
+        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setMessage("Please wait");
+            this.dialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try {
+                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
+                return true;
+            } catch (Exception e) {
+                Log.e("tag", "error", e);
+                return false;
+            }
+        }
+        @Override
+        protected void onPostExecute(final Boolean success) {
+
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+
+                SpannableStringBuilder snackbarText = new SpannableStringBuilder();
+                snackbarText.append("Account ");
+                snackbarText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, snackbarText.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                int boldStart = snackbarText.length();
+                snackbarText.append(riotControl.summonerAccount.getSummonerName());
+                snackbarText.setSpan(new ForegroundColorSpan(Color.YELLOW), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                snackbarText.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), boldStart, snackbarText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                snackbarText.append(" has been Summoned");
+                Snackbar.make(mDrawerLayout, snackbarText, Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE).show();
+            }
+        }
+    }
 }

@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#cba818</color>
     <color name="defBackground">#d3dfd8</color>
-    <color name="primary_text_default_material_light">#000000</color>
+    <color name="primary_text_default_material_light">#deffffff</color>
+    <color name="primary_text_default_material_dark">#000000</color>
+    <color name="foreground_material_light">#ffffff</color>
 </resources>
