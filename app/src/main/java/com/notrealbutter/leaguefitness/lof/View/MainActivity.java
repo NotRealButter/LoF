@@ -1,10 +1,12 @@
-package com.notrealbutter.leaguefitness.lof;
+package com.notrealbutter.leaguefitness.lof.View;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,11 +20,13 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.notrealbutter.leaguefitness.lof.LeagueCntl.RiotController;
+import com.notrealbutter.leaguefitness.lof.Control.RiotController;
+import com.notrealbutter.leaguefitness.lof.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
      DrawerLayout mDrawerLayout;
+    CoordinatorLayout coordinatorLayout;
 
     Intent gameStatIntent;
     Intent exerciseIntent;
@@ -119,6 +123,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initFAB();
     }
 
+    public void initPrompt()
+    {
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+        View promptsView = li.inflate(R.layout.prompts, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MainActivity.this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and set it to result
+                                // edit text
+                                riotControl.summonerAccount.setNameCollected(userInput.getText().toString());
+                                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
+                                Snackbar snackbar = Snackbar.make(mDrawerLayout,"Summoner " + riotControl.summonerAccount.getSummonerName() + " has been added to the Game Stat area", Snackbar.LENGTH_LONG );
+                                snackbar.show();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 
     public void initFAB(){
         button = (FloatingActionButton) findViewById(R.id.fab);
@@ -127,42 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onClick(View arg0) {
-
-                // get prompts.xml view
-                LayoutInflater li = LayoutInflater.from(MainActivity.this);
-                View promptsView = li.inflate(R.layout.prompts, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        MainActivity.this);
-
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(promptsView);
-
-                final EditText userInput = (EditText) promptsView
-                        .findViewById(R.id.editTextDialogUserInput);
-
-                // set dialog message
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
-                                        riotControl.summonerAccount.setNameCollected(userInput.getText().toString());
-                                        riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                initPrompt();
             }
         });
     }

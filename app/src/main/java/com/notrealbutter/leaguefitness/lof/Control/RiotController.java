@@ -1,18 +1,27 @@
-package com.notrealbutter.leaguefitness.lof.LeagueCntl;
+package com.notrealbutter.leaguefitness.lof.Control;
 
+import com.notrealbutter.leaguefitness.lof.Model.Match;
+import com.notrealbutter.leaguefitness.lof.Model.SummonerAccount;
 import com.robrua.orianna.api.core.AsyncRiotAPI;
 import com.robrua.orianna.api.dto.BaseRiotAPI;
 import com.robrua.orianna.type.api.Action;
 import com.robrua.orianna.type.core.common.Region;
+import com.robrua.orianna.type.core.game.Game;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import com.robrua.orianna.type.exception.APIException;
+
+import java.util.List;
+import java.util.ListIterator;
 
 public class RiotController
 {
     public SummonerAccount summonerAccount;
+    public Match match;
+    public ListIterator matchIterator;
 
     public RiotController(){
         summonerAccount = new SummonerAccount();
+        match = new Match();
     }
 
     public void apiInit(){
@@ -37,8 +46,24 @@ public class RiotController
                 System.out.println("Couldn't get summoner");
             }
         }, name);
-    }
+        AsyncRiotAPI.getRecentGames(new Action<List<Game>>() {
+            @Override
+            public void handle(APIException exception) {
+                System.out.println("Could not load Summoner Games");
+            }
 
+            @Override
+            public void perform(List<Game> responseData) {
+                match.setRecentGamesCollected(responseData);
+                matchIterator = match.getRecentGamesCollected().listIterator();
+
+                while(matchIterator.hasNext()) {
+                   System.out.println(matchIterator.next());
+//                    System.out.println(match.getRecentGamesCollected().get(matchIterator.previousIndex()).getID());
+                }
+            }
+        },summonerAccount.getSummonerName());
+    }
 
     public void setSummonerAccount(SummonerAccount acct){
         summonerAccount = acct;
