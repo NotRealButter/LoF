@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 // get user input and set it to result
                                 // edit text
                                 riotControl.summonerAccount.setNameCollected(userInput.getText().toString());
-//                                riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
+                                riotControl.initMatchList();
                                 new FetchGameInfo().execute();
 
                             }
