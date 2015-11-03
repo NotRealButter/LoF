@@ -19,8 +19,6 @@ public class RiotController
     public SummonerAccount summonerAccount;
     public Match match;
     private ArrayList<MatchListItem> matchListItems = new ArrayList<>();
-    ;
-
 
     public RiotController(){
         summonerAccount = new SummonerAccount();
@@ -60,14 +58,16 @@ public class RiotController
                 match.setRecentGamesCollected(responseData);
             }
         }, summonerAccount.getSummonerName());
-
     }
+
     public void initMatchList() {
         for (int i = 0; i < match.getRecentGamesCollected().size(); i++) {
 
             getMatchListItems().add(
-                    new MatchListItem(match.getRecentGamesCollected().get(i).getChampion().getName(),
-                            match.getRecentGamesCollected().get(i).getType().toString(),
+                    new MatchListItem(
+                            match.getRecentGamesCollected().get(i).getChampion().getName(),
+                            match.getRecentGamesCollected().get(i).getMap().toString(),
+                            match.getRecentGamesCollected().get(i).getChampion().getImage().getFull(),
                             match.getRecentGamesCollected().get(i).getStats().getKills(),
                             match.getRecentGamesCollected().get(i).getStats().getDeaths(),
                             match.getRecentGamesCollected().get(i).getStats().getAssists(),
@@ -87,5 +87,7 @@ public class RiotController
     public void setMatchListItems(ArrayList<MatchListItem> matchListItems) {
         this.matchListItems = matchListItems;
     }
+
+
 
 }

@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected void onPreExecute() {
-            this.dialog.setMessage("Please wait");
+            this.dialog.setMessage(getResources().getString(R.string.please_wait));
             this.dialog.show();
         }
 
@@ -200,6 +200,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected Boolean doInBackground(String... params) {
             try {
                 riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
+                int random = (int)(Math.random()*500);
+                try {
+                    Thread.sleep(1500 + random);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
                 return true;
             } catch (Exception e) {
                 Log.e("tag", "error", e);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LeagueOfFitness</string>
+    <string name="app_name">League Of Fitness</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -35,6 +35,8 @@
     <string name="title_activity_load_summoner">LoadSummonerActivity</string>
     <string name="title_activity_game_stat">GameStatActivity</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
+
+    <string name="please_wait">"Please Wait while the League of Fitness summons your Account!</string>
 
     <string name = "api_key"> f206b7e6-8f2c-4a64-a1bd-79e26953b808</string>
 </resources>

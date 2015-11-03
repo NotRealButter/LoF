@@ -15,10 +15,7 @@ import android.widget.Toast;
 
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
 import com.notrealbutter.leaguefitness.lof.Model.MatchListAdapter;
-import com.notrealbutter.leaguefitness.lof.Model.MatchListItem;
 import com.notrealbutter.leaguefitness.lof.R;
-
-import java.util.ArrayList;
 
 public class GameStatActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -35,7 +32,7 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     private TextView summIDBox;
     private TextView summLVLBox;
 
-    ArrayList<MatchListItem> matchListItems = new ArrayList<>();
+//    ArrayList<MatchListItem> matchListItems = new ArrayList<>();
     MatchListAdapter matchListAdapter;
     ListView matchListView;
 
@@ -118,6 +115,12 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
 
         initViews();
         initMatchList();
+//        matchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                matchListAdapter.onItemClick(position)
+//            }
+//        });
     }
 
     public void initViews()
@@ -130,19 +133,9 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     public void initMatchList(){
         System.out.println("Init Match List is Starting");
 
-        for(int i=0; i < riotController.match.getRecentGamesCollected().size(); i++)
-        {
-            matchListItems.add(
-                    new MatchListItem(riotController.match.getRecentGamesCollected().get(i).getChampion().getName(),
-                        riotController.match.getRecentGamesCollected().get(i).getType().toString(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getKills(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getDeaths(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getAssists(),
-                        riotController.match.getRecentGamesCollected().get(i).getStats().getMinionsKilled(),
-                        ((int) riotController.match.getRecentGamesCollected().get(i).getStats().getTimePlayed())));
-        }
+        riotController.initMatchList();
 
-        matchListAdapter = new MatchListAdapter(getApplicationContext(), R.layout.game_view, matchListItems);
+        matchListAdapter = new MatchListAdapter(getApplicationContext(), R.layout.game_view, riotController.getMatchListItems());
         matchListView.setAdapter(matchListAdapter);
     }
 }
