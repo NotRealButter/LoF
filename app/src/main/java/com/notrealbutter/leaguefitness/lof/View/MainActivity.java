@@ -200,9 +200,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected Boolean doInBackground(String... params) {
             try {
                 riotControl.leagueInit(riotControl.summonerAccount.getSummonerName());
-                int random = (int)(Math.random()*500);
+                int random = (int)(Math.random()*1000);
                 try {
-                    Thread.sleep(1500 + random);
+                    Thread.sleep(2000 + random);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 }

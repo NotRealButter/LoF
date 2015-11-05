@@ -13,16 +13,16 @@ import com.notrealbutter.leaguefitness.lof.R;
 
 import java.util.ArrayList;
 
-public class MatchListAdapter extends BaseAdapter {
+public class BasicMatchListAdapter extends BaseAdapter {
 
     Context mContext;
-    ArrayList<MatchListItem> gameList;
+    ArrayList<BasicMatchListItem> gameList;
     int layoutResID;
 
     public int MINUTES_IN_AN_HOUR = 60;
     public int SECONDS_IN_A_MINUTE = 60;
 
-    public MatchListAdapter(Context context, int layoutResourceID, ArrayList<MatchListItem> gameList) {
+    public BasicMatchListAdapter(Context context, int layoutResourceID, ArrayList<BasicMatchListItem> gameList) {
         this.mContext = context;
         this.gameList = gameList;
         this.layoutResID = layoutResourceID;
@@ -43,11 +43,15 @@ public class MatchListAdapter extends BaseAdapter {
         return 0;
     }
 
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        return null;
+//    }
+
     public Object onItemClick(int position){
         return gameList.get(position);
     }
 
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
 
@@ -71,15 +75,15 @@ public class MatchListAdapter extends BaseAdapter {
 //        System.out.println(championNameBox.getText());
         gameType.setText("On " + gameList.get(position).gameType);
 //        System.out.println(gameType.getText());
-        System.out.println("Picture can be found at" +gameList.get(position).championImageLocation);
+        System.out.println("Picture can be found at" + gameList.get(position).champion);
         Ion.with(championFaceBox)
                 .placeholder(R.drawable.profile_icon_tsm)
                 .error(R.drawable.icon)
 //                .animateLoad(spinAnimation)
 //                .animateIn(fadeInAnimation)
                 .fitXY()
-                .load(gameList.get(position).championImageLocation);
-        kcBox.setText("Kills: " + gameList.get(position).kc);
+                .load("http://ddragon.leagueoflegends.com/cdn/5.22.1/img/champion/" + gameList.get(position).champion.getImage().getFull());
+                        kcBox.setText("Kills: " + gameList.get(position).kc);
         dcBox.setText("Deaths: "+gameList.get(position).dc);
         acBox.setText("Assists: "+gameList.get(position).ac);
         csBox.setText("CS: "+gameList.get(position).cs);
@@ -88,9 +92,6 @@ public class MatchListAdapter extends BaseAdapter {
     }
 
     public String timeConversion(int seconds) {
-
-
-
         int minutes = seconds / SECONDS_IN_A_MINUTE;
         seconds -= minutes * SECONDS_IN_A_MINUTE;
 

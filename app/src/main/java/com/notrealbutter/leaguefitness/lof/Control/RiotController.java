@@ -1,15 +1,17 @@
 package com.notrealbutter.leaguefitness.lof.Control;
 
+import com.notrealbutter.leaguefitness.lof.Model.BasicMatchListItem;
 import com.notrealbutter.leaguefitness.lof.Model.Match;
-import com.notrealbutter.leaguefitness.lof.Model.MatchListItem;
 import com.notrealbutter.leaguefitness.lof.Model.SummonerAccount;
 import com.robrua.orianna.api.core.AsyncRiotAPI;
 import com.robrua.orianna.api.dto.BaseRiotAPI;
 import com.robrua.orianna.type.api.Action;
 import com.robrua.orianna.type.core.common.Region;
 import com.robrua.orianna.type.core.game.Game;
+import com.robrua.orianna.type.core.staticdata.Item;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import com.robrua.orianna.type.exception.APIException;
+import com.robrua.orianna.type.exception.MissingDataException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,9 @@ public class RiotController
 {
     public SummonerAccount summonerAccount;
     public Match match;
-    private ArrayList<MatchListItem> matchListItems = new ArrayList<>();
+    private ArrayList<BasicMatchListItem> basicMatchListItems = new ArrayList<>();
+    Item placeholderItem;
+
 
     public RiotController(){
         summonerAccount = new SummonerAccount();
@@ -63,16 +67,163 @@ public class RiotController
     public void initMatchList() {
         for (int i = 0; i < match.getRecentGamesCollected().size(); i++) {
 
-            getMatchListItems().add(
-                    new MatchListItem(
+            getBasicMatchListItems().add(
+                    new BasicMatchListItem(
                             match.getRecentGamesCollected().get(i).getChampion().getName(),
                             match.getRecentGamesCollected().get(i).getMap().toString(),
-                            match.getRecentGamesCollected().get(i).getChampion().getImage().getFull(),
+                            match.getRecentGamesCollected().get(i).getChampion(),
                             match.getRecentGamesCollected().get(i).getStats().getKills(),
                             match.getRecentGamesCollected().get(i).getStats().getDeaths(),
                             match.getRecentGamesCollected().get(i).getStats().getAssists(),
                             match.getRecentGamesCollected().get(i).getStats().getMinionsKilled(),
-                            ((int) match.getRecentGamesCollected().get(i).getStats().getTimePlayed())));
+                            ((int) match.getRecentGamesCollected().get(i).getStats().getTimePlayed()),
+                            match.getRecentGamesCollected().get(i).getStats().getGoldEarned(),
+                            getItem(i,0),
+                            getItem(i,1),
+                            getItem(i,2),
+                            getItem(i,3),
+                            getItem(i,4),
+                            getItem(i,5),
+                            getItem(i,6)
+            ));
+        }
+    }
+
+    public Item getItem(int i, int itemNumber ) {
+        if (itemNumber == 0) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem0();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 1) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem1();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 2) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem2();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 3) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem3();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 4) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem4();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 5) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem5();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        }
+        if (itemNumber == 6) {
+            try {
+                Item item = match.getRecentGamesCollected().get(i).getStats().getItem6();
+                return item;
+            } catch (MissingDataException e) {
+                AsyncRiotAPI.getItem(new Action<Item>() {
+                    @Override
+                    public void handle(APIException exception) {
+                        System.out.println("failed");
+                    }
+
+                    @Override
+                    public void perform(Item responseData) {
+                        placeholderItem = responseData;
+                    }
+                }, 3460);
+                return placeholderItem;
+            }
+        } else {
+            return null;
         }
     }
 
@@ -80,14 +231,11 @@ public class RiotController
         summonerAccount = acct;
     }
 
-    public ArrayList<MatchListItem> getMatchListItems() {
-        return matchListItems;
+    public ArrayList<BasicMatchListItem> getBasicMatchListItems() {
+        return basicMatchListItems;
     }
 
-    public void setMatchListItems(ArrayList<MatchListItem> matchListItems) {
-        this.matchListItems = matchListItems;
+    public void setBasicMatchListItems(ArrayList<BasicMatchListItem> basicMatchListItems) {
+        this.basicMatchListItems = basicMatchListItems;
     }
-
-
-
 }

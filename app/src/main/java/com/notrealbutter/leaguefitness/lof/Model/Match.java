@@ -1,20 +1,10 @@
 package com.notrealbutter.leaguefitness.lof.Model;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
 import com.robrua.orianna.type.core.game.Game;
-import com.notrealbutter.leaguefitness.lof.R;
-import com.robrua.orianna.type.core.staticdata.Image;
+import com.robrua.orianna.type.core.staticdata.Item;
 
-
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -28,13 +18,20 @@ public class Match {
     public int gameDuration;
     public int assistCount;
     public ListIterator matchIterator;
+    public Item item0;
+    public Item item1;
+    public Item item2;
+    public Item item3;
+    public Item item4;
+    public Item item5;
+    public Item item6;
+
 
 
     public Match() {
         this.recentGamesCollected = new List<Game>() {
             @Override
             public void add(int location, Game object) {
-
             }
 
             @Override
@@ -174,50 +171,7 @@ public class Match {
     }
 
     public void setRecentGamesCollected(List<Game> recentGamesCollected) {
-
-
         this.recentGamesCollected = recentGamesCollected;
         matchIterator = getRecentGamesCollected().listIterator();
     }
-
-    public int getKillCount() {
-        return killCount;
-    }
-
-    public void setKillCount(int killCount) {
-        this.killCount = killCount;
-    }
-
-    public int getDeathCount() {
-        return deathCount;
-    }
-
-    public void setDeathCount(int deathCount) {
-        this.deathCount = deathCount;
-    }
-
-    public int getAssistCount() {
-        return assistCount;
-    }
-
-    public void setAssistCount(int assistCount) {
-        this.assistCount = assistCount;
-    }
-
-    public int getCreepScore() {
-        return creepScore;
-    }
-
-    public void setCreepScore(int creepScore) {
-        this.creepScore = creepScore;
-    }
-
-    public int getGameDuration() {
-        return gameDuration;
-    }
-
-    public void setGameDuration(int gameDuration) {
-        this.gameDuration = gameDuration;
-    }
 }
-

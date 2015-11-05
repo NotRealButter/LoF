@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
-import com.notrealbutter.leaguefitness.lof.Model.MatchListAdapter;
+import com.notrealbutter.leaguefitness.lof.Model.BasicMatchListAdapter;
 import com.notrealbutter.leaguefitness.lof.R;
 
 public class GameStatActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -32,8 +32,8 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     private TextView summIDBox;
     private TextView summLVLBox;
 
-//    ArrayList<MatchListItem> matchListItems = new ArrayList<>();
-    MatchListAdapter matchListAdapter;
+//    ArrayList<BasicMatchListItem> matchListItems = new ArrayList<>();
+    BasicMatchListAdapter basicMatchListAdapter;
     ListView matchListView;
 
     @Override
@@ -115,12 +115,6 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
 
         initViews();
         initMatchList();
-//        matchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                matchListAdapter.onItemClick(position)
-//            }
-//        });
     }
 
     public void initViews()
@@ -135,7 +129,7 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
 
         riotController.initMatchList();
 
-        matchListAdapter = new MatchListAdapter(getApplicationContext(), R.layout.game_view, riotController.getMatchListItems());
-        matchListView.setAdapter(matchListAdapter);
+        basicMatchListAdapter = new BasicMatchListAdapter(getApplicationContext(), R.layout.game_view, riotController.getBasicMatchListItems());
+        matchListView.setAdapter(basicMatchListAdapter);
     }
 }
