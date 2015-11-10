@@ -27,7 +27,6 @@
         <item>@string/send</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exerciseLogo">Exercise</string>
     <string name="gameStatLogo">Game Stats</string>
@@ -39,4 +38,6 @@
     <string name="please_wait">"Please Wait while the League of Fitness summons your Account!</string>
 
     <string name = "api_key"> f206b7e6-8f2c-4a64-a1bd-79e26953b808</string>
+
+    <string name="starting_user_name">Fireglo</string>
 </resources>

@@ -9,4 +9,6 @@
 
     <!--custom shit-->
     <dimen name="icon_size">90dp</dimen>
+    <dimen name="item_size">40dp</dimen>
+    <dimen name="standard_margin">20dp</dimen>
 </resources>

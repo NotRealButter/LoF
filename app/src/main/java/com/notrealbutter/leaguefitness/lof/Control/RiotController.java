@@ -57,7 +57,7 @@ public class RiotController
             public void perform(List<Game> responseData) {
                 match.setRecentGamesCollected(responseData);
             }
-        }, summonerAccount.getSummonerName());
+        }, name);
     }
 
     public void initMatchList() {

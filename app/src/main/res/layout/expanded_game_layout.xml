@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:id="@+id/championImageBox"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_margin="@dimen/standard_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Champion Name"
+        android:id="@+id/championNameBox"
+        android:layout_alignTop="@+id/championImageBox"
+        android:layout_toRightOf="@+id/championImageBox"
+        android:layout_toEndOf="@+id/championImageBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Map Name"
+        android:id="@+id/map_name"
+        android:layout_below="@+id/championNameBox"
+        android:layout_toRightOf="@+id/championImageBox"
+        android:layout_toEndOf="@+id/championImageBox"
+        android:layout_marginTop="@dimen/standard_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="K/D/A"
+        android:id="@+id/kda_box"
+        android:layout_alignBottom="@+id/championImageBox"
+        android:layout_alignLeft="@+id/map_name"
+        android:layout_alignStart="@+id/map_name"
+        android:layout_marginTop="@dimen/standard_margin" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_1_box"
+        android:layout_below="@+id/championImageBox"
+        android:layout_alignLeft="@+id/championImageBox"
+        android:layout_alignStart="@+id/championImageBox"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_2_box"
+        android:layout_below="@+id/championImageBox"
+        android:layout_toRightOf="@+id/item_1_box"
+        android:layout_toEndOf="@+id/item_1_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_3_box"
+        android:layout_below="@+id/championImageBox"
+        android:layout_toRightOf="@+id/item_2_box"
+        android:layout_toEndOf="@+id/item_2_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_0_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_alignTop="@+id/item_3_box"
+        android:layout_toRightOf="@+id/item_3_box"
+        android:layout_toEndOf="@+id/item_3_box"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_4_box"
+        android:layout_below="@+id/item_1_box"
+        android:layout_alignLeft="@+id/item_1_box"
+        android:layout_alignStart="@+id/item_1_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_5_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_below="@+id/item_2_box"
+        android:layout_toRightOf="@+id/item_4_box"
+        android:layout_toEndOf="@+id/item_4_box"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:layout_width="@dimen/item_size"
+        android:layout_height="@dimen/item_size"
+        android:id="@+id/item_6_box"
+        android:src="@drawable/profile_icon_tsm"
+        android:layout_below="@+id/item_3_box"
+        android:layout_toRightOf="@+id/item_5_box"
+        android:layout_toEndOf="@+id/item_5_box"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Gold Earned"
+        android:id="@+id/gold_earned"
+        android:layout_alignTop="@+id/map_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="CS:"
+        android:id="@+id/cs_box"
+        android:layout_alignTop="@+id/kda_box"
+        android:layout_toRightOf="@+id/championNameBox"
+        android:layout_toEndOf="@+id/championNameBox" />
+</RelativeLayout>
