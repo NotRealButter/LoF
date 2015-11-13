@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MatchListAdapter extends BaseAdapter {
 
     Context mContext;
-    ArrayList<MatchListItem> gameList;
+    public ArrayList<MatchListItem> gameList;
     int layoutResID;
 
     public int MINUTES_IN_AN_HOUR = 60;
@@ -84,13 +84,11 @@ public class MatchListAdapter extends BaseAdapter {
         acBox.setText("Assists: "+gameList.get(position).ac);
         csBox.setText("CS: "+gameList.get(position).cs);
         gameDurationBox.setText(timeConversion(gameList.get(position).gameDuration));
+
         return view;
     }
 
     public String timeConversion(int seconds) {
-
-
-
         int minutes = seconds / SECONDS_IN_A_MINUTE;
         seconds -= minutes * SECONDS_IN_A_MINUTE;
 

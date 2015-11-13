@@ -9,8 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.notrealbutter.leaguefitness.lof.Control.ExerciseController;
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
 import com.notrealbutter.leaguefitness.lof.R;
 
@@ -23,12 +25,23 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
     DrawerLayout mDrawerLayout;
     String[] navMenuTitles;
 
-    public RiotController riotController;
+    ExerciseController exerciseController;
+    RiotController riotController;
+
+    TextView exerciseInitiation,crunchBox,pushUpBox,squatBox,runBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initMenus();
+    }
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        afterSummon();
     }
 
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -67,6 +80,7 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.exerciseController = MainActivity.exerciseControl;
         this.riotController = MainActivity.riotControl;
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,6 +97,22 @@ public class ExerciseActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_gs);
         navigationView.setNavigationItemSelectedListener(this);
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+        exerciseInitiation = (TextView) findViewById(R.id.exerciseInitiation);
+        crunchBox = (TextView) findViewById(R.id.crunch_view);
+        pushUpBox = (TextView) findViewById(R.id.push_up_view);
+        squatBox = (TextView) findViewById(R.id.squat_view);
+        runBox = (TextView) findViewById(R.id.run_duration_view);
+    }
+
+    public void afterSummon(){
+        if(exerciseController.getSquatCount() > 0) {
+            exerciseInitiation.setText("");
+            crunchBox.setText("Crunches: " + exerciseController.getSitUpCount());
+            pushUpBox.setText("Push Ups: " + exerciseController.getPushupCount());
+            squatBox.setText("Squats: " + exerciseController.getSquatCount());
+            runBox.setText("Run Duration: " + exerciseController.getRunDuration());
+        }
     }
 }
 

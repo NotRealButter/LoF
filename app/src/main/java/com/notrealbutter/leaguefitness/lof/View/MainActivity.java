@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.notrealbutter.leaguefitness.lof.Control.ExerciseController;
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
 import com.notrealbutter.leaguefitness.lof.R;
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Intent mainIntent;
     String[] navMenuTitles;
     FloatingActionButton button;
+
     public static RiotController riotControl;
+    public static ExerciseController exerciseControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         riotControl = new RiotController();
+        exerciseControl = new ExerciseController();
         riotControl.apiInit();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

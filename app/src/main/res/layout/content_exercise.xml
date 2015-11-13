@@ -77,28 +77,28 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=" "
-            android:id="@+id/crunchBox" />
+            android:id="@+id/crunch_view" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=" "
-            android:id="@+id/pushUpBox" />
+            android:id="@+id/push_up_view" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=" "
-            android:id="@+id/burpeeView" />
+            android:id="@+id/squat_view" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=" "
-            android:id="@+id/runDurationBox" />
+            android:id="@+id/run_duration_view" />
 
     </LinearLayout>
 
