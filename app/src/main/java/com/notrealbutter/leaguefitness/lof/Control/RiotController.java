@@ -4,6 +4,7 @@ import com.notrealbutter.leaguefitness.lof.Model.BasicMatchListItem;
 import com.notrealbutter.leaguefitness.lof.Model.Match;
 import com.notrealbutter.leaguefitness.lof.Model.SummonerAccount;
 import com.robrua.orianna.api.core.AsyncRiotAPI;
+import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.api.dto.BaseRiotAPI;
 import com.robrua.orianna.type.api.Action;
 import com.robrua.orianna.type.core.common.Region;
@@ -24,6 +25,7 @@ public class RiotController
     Item placeholderItem;
 
 
+
     public RiotController(){
         summonerAccount = new SummonerAccount();
         match = new Match();
@@ -33,9 +35,9 @@ public class RiotController
         AsyncRiotAPI.setMirror(Region.NA);
         AsyncRiotAPI.setRegion(Region.NA);
         AsyncRiotAPI.setAPIKey("f206b7e6-8f2c-4a64-a1bd-79e26953b808");
-        BaseRiotAPI.setMirror(Region.NA);
-        BaseRiotAPI.setRegion(Region.NA);
-        BaseRiotAPI.setAPIKey("f206b7e6-8f2c-4a64-a1bd-79e26953b808");
+        RiotAPI.setMirror(Region.NA);
+        RiotAPI.setRegion(Region.NA);
+        RiotAPI.setAPIKey("f206b7e6-8f2c-4a64-a1bd-79e26953b808");
     }
 
     public void leagueInit(String name) {
@@ -66,7 +68,7 @@ public class RiotController
 
     public void initMatchList() {
         for (int i = 0; i < match.getRecentGamesCollected().size(); i++) {
-
+            System.out.println("GETTING INFO HERE "+i );
             getBasicMatchListItems().add(
                     new BasicMatchListItem(
                             match.getRecentGamesCollected().get(i).getChampion().getName(),
@@ -238,4 +240,5 @@ public class RiotController
     public void setBasicMatchListItems(ArrayList<BasicMatchListItem> basicMatchListItems) {
         this.basicMatchListItems = basicMatchListItems;
     }
+
 }

@@ -39,4 +39,6 @@
     <string name="please_wait">"Please Wait while the League of Fitness summons your Account!</string>
 
     <string name = "api_key"> f206b7e6-8f2c-4a64-a1bd-79e26953b808</string>
+    <string name="app_title">League Of Fitness</string>
+    <string name="account">Account Information</string>
 </resources>

@@ -1,20 +1,24 @@
 package com.notrealbutter.leaguefitness.lof.View;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.notrealbutter.leaguefitness.lof.Control.RiotController;
-import com.notrealbutter.leaguefitness.lof.Model.BasicMatchListAdapter;
+import com.notrealbutter.leaguefitness.lof.Control.BasicMatchListAdapter;
 import com.notrealbutter.leaguefitness.lof.R;
 
 public class GameStatActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -26,15 +30,14 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     DrawerLayout mDrawerLayout;
     String[] navMenuTitles;
 
-
     public RiotController riotController;
     private TextView summNameBox;
     private TextView summIDBox;
     private TextView summLVLBox;
 
-//    ArrayList<BasicMatchListItem> matchListItems = new ArrayList<>();
     BasicMatchListAdapter basicMatchListAdapter;
-    ListView matchListView;
+    RecyclerView matchListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,17 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
     public void initMenus(){
         setContentView(R.layout.activity_game_stat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        CollapsingToolbarLayout collapsingToolbar;
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(getResources().getString(R.string.gamestat));
+        collapsingToolbar.setExpandedTitleColor(Color.WHITE);
+        ImageView header = (ImageView) findViewById(R.id.header);
+
+
         setSupportActionBar(toolbar);
 
         this.riotController = MainActivity.riotControl;
@@ -111,7 +125,7 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
-        matchListView = (ListView)findViewById(R.id.recentMatchListBoxGS);
+        matchListView = (RecyclerView) findViewById(R.id.recentMatchListBoxGS);
 
         initViews();
         initMatchList();
@@ -129,7 +143,8 @@ public class GameStatActivity extends AppCompatActivity implements NavigationVie
 
         riotController.initMatchList();
 
-        basicMatchListAdapter = new BasicMatchListAdapter(getApplicationContext(), R.layout.game_view, riotController.getBasicMatchListItems());
+        basicMatchListAdapter = new BasicMatchListAdapter(getApplicationContext(), riotController.getBasicMatchListItems());
         matchListView.setAdapter(basicMatchListAdapter);
+        matchListView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

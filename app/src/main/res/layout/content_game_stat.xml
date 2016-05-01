@@ -1,71 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_game_stat"
     tools:context="com.notrealbutter.leaguefitness.lof.View.GameStatActivity">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:tag="gameStatFrag"
         android:id="@+id/gameStatFrag"
         tools:context="com.notrealbutter.leaguefitness.leagueoffitness.Fragments.GameStatFragment">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/nav_header_height"
-            android:background="@drawable/side_nav_bar"
-            android:padding="3dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:cropToPadding="true"
-            >
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="456dp"
-                    android:layout_height="173dp"
-                    android:id="@+id/imageView4"
-                    android:layout_alignTop="@+id/textView4"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/fiora"
-                    android:scaleType="fitStart"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="5"
-                    android:shadowDx="10"
-                    android:layout_toLeftOf="@+id/textView4"
-                    android:layout_alignParentBottom="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="@string/gameStatLogo"
-                    android:id="@+id/textView4"
-                    android:textSize="45sp"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="5"
-                    android:shadowDx="10"
-                    android:layout_gravity="right|center_vertical" />
-
-            </FrameLayout>
-        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/nav_header_height">
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="312dp"
@@ -85,9 +36,7 @@
                 android:id="@+id/summonerIDBoxGS"
                 android:layout_x="2dp"
                 android:layout_y="76dp"
-                android:layout_below="@+id/summonerNameBoxGS"
-                android:layout_toRightOf="@+id/scrollView"
-                android:layout_toEndOf="@+id/scrollView" />
+                android:layout_below="@+id/summonerNameBoxGS" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,30 +47,15 @@
                 android:layout_x="327dp"
                 android:layout_y="4dp"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/scrollView" />
-
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scrollView"
-                android:layout_x="-12dp"
-                android:layout_y="32dp" >
-
-            </ScrollView>
-
-            <ListView
-                android:layout_width="328dp"
-                android:layout_height="385dp"
-                android:id="@+id/recentMatchListBoxGS"
-                android:layout_x="6dp"
-                android:layout_y="109dp"
-                android:choiceMode="singleChoice"
-                android:layout_below="@+id/summonerIDBoxGS"
-                android:layout_toRightOf="@+id/scrollView"
-                android:layout_toEndOf="@+id/scrollView" />
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/recentMatchListBoxGS"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
     </RelativeLayout>
-
-
-</RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
