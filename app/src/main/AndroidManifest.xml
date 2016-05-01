@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.notrealbutter.leaguefitness.lof" >
+    package="com.notrealbutter.leaguefitness.lof">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,12 +9,12 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".View.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +24,14 @@
         <activity
             android:name=".View.GameStatActivity"
             android:label="@string/title_activity_game_stat"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".View.ExerciseActivity"
             android:label="@string/title_activity_exercise"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".View.AccountActivity"></activity>
     </application>
 
 </manifest>
