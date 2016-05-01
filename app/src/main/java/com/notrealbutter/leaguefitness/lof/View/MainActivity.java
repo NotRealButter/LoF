@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Intent gameStatIntent;
     Intent exerciseIntent;
     Intent mainIntent;
+    Intent accountIntent;
+
     String[] navMenuTitles;
     FloatingActionButton button;
     public static RiotController riotControl;
@@ -77,25 +79,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(mainIntent);
             Toast toast1 = Toast.makeText(getApplicationContext(), "this works1", Toast.LENGTH_LONG);
             toast1.show();
+        } else if (id==R.id.nav_account_information) {
+            startActivity(accountIntent);
         } else if (id == R.id.nav_game_stat) {
             startActivity(gameStatIntent);
-            Toast toast2 = Toast.makeText(getApplicationContext(), "this works2", Toast.LENGTH_LONG);
-            toast2.show();
         } else if (id == R.id.nav_exercise) {
             startActivity(exerciseIntent);
-            Toast toast3 = Toast.makeText(getApplicationContext(), "this works3", Toast.LENGTH_LONG);
-            toast3.show();
         } else if (id == R.id.nav_about) {
-            Toast toast4 = Toast.makeText(getApplicationContext(), "this works4", Toast.LENGTH_LONG);
-            toast4.show();
         } else if (id == R.id.nav_share) {
-            Toast toast5 = Toast.makeText(getApplicationContext(), "this works5", Toast.LENGTH_LONG);
-            toast5.show();
         } else if (id == R.id.nav_send) {
-            Toast toast6 = Toast.makeText(getApplicationContext(), "this works6", Toast.LENGTH_LONG);
-            toast6.show();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -115,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainIntent = new Intent(mDrawerLayout.getContext(), MainActivity.class);
         gameStatIntent = new Intent(mDrawerLayout.getContext(), GameStatActivity.class);
         exerciseIntent = new Intent(mDrawerLayout.getContext(), ExerciseActivity.class);
+        accountIntent = new Intent(mDrawerLayout.getContext(), AccountActivity.class);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

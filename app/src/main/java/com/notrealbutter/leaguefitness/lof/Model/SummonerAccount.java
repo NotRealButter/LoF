@@ -52,11 +52,4 @@ public class SummonerAccount {
     public void setSummonerLevelCollected(int summonerLevelCollected) {
         this.summonerLevelCollected = summonerLevelCollected;
     }
-
-
-
-
 }
-
-
-

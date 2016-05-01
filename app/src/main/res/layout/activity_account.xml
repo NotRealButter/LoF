@@ -7,7 +7,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    android:text="@string/gameStatLogo"
     tools:openDrawer="start">
 
     <android.support.design.widget.CoordinatorLayout
@@ -19,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.notrealbutter.leaguefitness.lof.View.GameStatActivity">
+        tools:context="com.notrealbutter.leaguefitness.lof.View.AccountActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -30,7 +29,7 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+                android:id="@+id/account_collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
                 android:fitsSystemWindows="true"
@@ -42,7 +41,7 @@
 
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/account_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
